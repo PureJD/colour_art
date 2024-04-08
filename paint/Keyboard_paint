@@ -1,0 +1,57 @@
+from turtle import Turtle, Screen
+from random import randint
+
+
+colours = ['blue', 'green', 'gray', 'black', 'orange', 'purple', 'yellow', 'red']
+tim = Turtle()
+screen = Screen()
+#screen.bgpic('paint.gif') #This image works as a background but simply impacts performance too much 
+tim.speed('fastest')
+
+
+def dragging(x, y):  # These parameters will be the mouse position
+    tim.ondrag(None)
+    tim.setheading(tim.towards(x, y))
+    tim.goto(x, y)
+    tim.ondrag(dragging)
+    
+    
+#Keyboard functions
+def move_forward():
+    tim.forward(10)
+def turn_left():
+    tim.left(10)
+def turn_right():
+    tim.right(10)
+def move_back():
+    tim.back(10)
+def change_colour():
+    tim.pencolor(colours[randint(0,7)])
+def clear():
+    tim.clear()
+def reset():
+    tim.reset() 
+    
+
+def main():  # This will run the program
+    screen.listen()
+    #mouse inputs 
+    
+    
+    
+    tim.ondrag(dragging)  # When we drag the turtle object call dragging
+    
+    
+    #keyboard inputs
+    screen.onkeypress(key='w', fun=move_forward)
+    screen.onkeypress(key='a', fun=turn_left)
+    screen.onkeypress(key='d', fun=turn_right)
+    screen.onkeypress(key='s', fun=move_back)
+    screen.onkeypress(key='c', fun=clear)
+    screen.onkeypress(key='space', fun=change_colour)
+    screen.onkeypress(key='r', fun=reset)
+
+    screen.mainloop()  # This will continue running main()
+    
+
+main()
